@@ -3,8 +3,6 @@
 
 defmodule AWS.Logs do
   @moduledoc """
-  Amazon CloudWatch Logs API Reference
-
   You can use Amazon CloudWatch Logs to monitor, store, and access your log
   files from Amazon Elastic Compute Cloud (Amazon EC2) instances, Amazon
   CloudTrail, or other sources. You can then retrieve the associated log data
@@ -73,10 +71,14 @@ defmodule AWS.Logs do
   must be unique within a region for an AWS account. You can create up to 500
   log groups per account.
 
-  You must use the following guidelines when naming a log group: <ul> <li>Log
-  group names can be between 1 and 512 characters long.</li> <li>Allowed
-  characters are a-z, A-Z, 0-9, '_' (underscore), '-' (hyphen), '/' (forward
-  slash), and '.' (period).</li> </ul>
+  You must use the following guidelines when naming a log group:
+
+  <ul> <li> Log group names can be between 1 and 512 characters long.
+
+  </li> <li> Allowed characters are a-z, A-Z, 0-9, '_' (underscore), '-'
+  (hyphen), '/' (forward slash), and '.' (period).
+
+  </li> </ul>
   """
   def create_log_group(client, input, options \\ []) do
     request(client, "CreateLogGroup", input, options)
@@ -87,9 +89,13 @@ defmodule AWS.Logs do
   stream must be unique within the log group. There is no limit on the number
   of log streams that can exist in a log group.
 
-  You must use the following guidelines when naming a log stream: <ul>
-  <li>Log stream names can be between 1 and 512 characters long.</li> <li>The
-  ':' colon character is not allowed.</li> </ul>
+  You must use the following guidelines when naming a log stream:
+
+  <ul> <li> Log stream names can be between 1 and 512 characters long.
+
+  </li> <li> The ':' colon character is not allowed.
+
+  </li> </ul>
   """
   def create_log_stream(client, input, options \\ []) do
     request(client, "CreateLogStream", input, options)
@@ -148,10 +154,9 @@ defmodule AWS.Logs do
   destination name.
 
   By default, this operation returns up to 50 destinations. If there are more
-  destinations to list, the response would contain a <code
-  class="code">nextToken` value in the response body. You can also limit the
-  number of destinations returned in the response by specifying the <code
-  class="code">limit` parameter in the request.
+  destinations to list, the response would contain a `nextToken` value in the
+  response body. You can also limit the number of destinations returned in
+  the response by specifying the `limit` parameter in the request.
   """
   def describe_destinations(client, input, options \\ []) do
     request(client, "DescribeDestinations", input, options)
@@ -164,9 +169,9 @@ defmodule AWS.Logs do
 
   By default, this operation returns up to 50 export tasks that satisfy the
   specified filters. If there are more export tasks to list, the response
-  would contain a <code class="code">nextToken` value in the response body.
-  You can also limit the number of export tasks returned in the response by
-  specifying the <code class="code">limit` parameter in the request.
+  would contain a `nextToken` value in the response body. You can also limit
+  the number of export tasks returned in the response by specifying the
+  `limit` parameter in the request.
   """
   def describe_export_tasks(client, input, options \\ []) do
     request(client, "DescribeExportTasks", input, options)
@@ -178,10 +183,9 @@ defmodule AWS.Logs do
   name.
 
   By default, this operation returns up to 50 log groups. If there are more
-  log groups to list, the response would contain a <code
-  class="code">nextToken` value in the response body. You can also limit the
-  number of log groups returned in the response by specifying the <code
-  class="code">limit` parameter in the request.
+  log groups to list, the response would contain a `nextToken` value in the
+  response body. You can also limit the number of log groups returned in the
+  response by specifying the `limit` parameter in the request.
   """
   def describe_log_groups(client, input, options \\ []) do
     request(client, "DescribeLogGroups", input, options)
@@ -193,11 +197,11 @@ defmodule AWS.Logs do
   name.
 
   By default, this operation returns up to 50 log streams. If there are more
-  log streams to list, the response would contain a <code
-  class="code">nextToken` value in the response body. You can also limit the
-  number of log streams returned in the response by specifying the <code
-  class="code">limit` parameter in the request. This operation has a limit of
-  five transactions per second, after which transactions are throttled.
+  log streams to list, the response would contain a `nextToken` value in the
+  response body. You can also limit the number of log streams returned in the
+  response by specifying the `limit` parameter in the request. This operation
+  has a limit of five transactions per second, after which transactions are
+  throttled.
   """
   def describe_log_streams(client, input, options \\ []) do
     request(client, "DescribeLogStreams", input, options)
@@ -208,10 +212,10 @@ defmodule AWS.Logs do
   The list returned in the response is ASCII-sorted by filter name.
 
   By default, this operation returns up to 50 metric filters. If there are
-  more metric filters to list, the response would contain a <code
-  class="code">nextToken` value in the response body. You can also limit the
-  number of metric filters returned in the response by specifying the <code
-  class="code">limit` parameter in the request.
+  more metric filters to list, the response would contain a `nextToken` value
+  in the response body. You can also limit the number of metric filters
+  returned in the response by specifying the `limit` parameter in the
+  request.
   """
   def describe_metric_filters(client, input, options \\ []) do
     request(client, "DescribeMetricFilters", input, options)
@@ -222,10 +226,10 @@ defmodule AWS.Logs do
   group. The list returned in the response is ASCII-sorted by filter name.
 
   By default, this operation returns up to 50 subscription filters. If there
-  are more subscription filters to list, the response would contain a <code
-  class="code">nextToken` value in the response body. You can also limit the
-  number of subscription filters returned in the response by specifying the
-  <code class="code">limit` parameter in the request.
+  are more subscription filters to list, the response would contain a
+  `nextToken` value in the response body. You can also limit the number of
+  subscription filters returned in the response by specifying the `limit`
+  parameter in the request.
   """
   def describe_subscription_filters(client, input, options \\ []) do
     request(client, "DescribeSubscriptionFilters", input, options)
@@ -234,19 +238,18 @@ defmodule AWS.Logs do
   @doc """
   Retrieves log events, optionally filtered by a filter pattern from the
   specified log group. You can provide an optional time range to filter the
-  results on the event <code class="code">timestamp`. You can limit the
-  streams searched to an explicit list of <code class="code">logStreamNames`.
+  results on the event `timestamp`. You can limit the streams searched to an
+  explicit list of `logStreamNames`.
 
   By default, this operation returns as much matching log events as can fit
   in a response size of 1MB, up to 10,000 log events, or all the events found
-  within a time-bounded scan window. If the response includes a <code
-  class="code">nextToken`, then there is more data to search, and the search
-  can be resumed with a new request providing the nextToken. The response
-  will contain a list of <code class="code">searchedLogStreams` that contains
-  information about which streams were searched in the request and whether
-  they have been searched completely or require further pagination. The <code
-  class="code">limit` parameter in the request. can be used to specify the
-  maximum number of events to return in a page.
+  within a time-bounded scan window. If the response includes a `nextToken`,
+  then there is more data to search, and the search can be resumed with a new
+  request providing the nextToken. The response will contain a list of
+  `searchedLogStreams` that contains information about which streams were
+  searched in the request and whether they have been searched completely or
+  require further pagination. The `limit` parameter in the request can be
+  used to specify the maximum number of events to return in a page.
   """
   def filter_log_events(client, input, options \\ []) do
     request(client, "FilterLogEvents", input, options)
@@ -254,17 +257,15 @@ defmodule AWS.Logs do
 
   @doc """
   Retrieves log events from the specified log stream. You can provide an
-  optional time range to filter the results on the event <code
-  class="code">timestamp`.
+  optional time range to filter the results on the event `timestamp`.
 
   By default, this operation returns as much log events as can fit in a
   response size of 1MB, up to 10,000 log events. The response will always
-  include a <code class="code">nextForwardToken` and a <code
-  class="code">nextBackwardToken` in the response body. You can use any of
-  these tokens in subsequent <code class="code">GetLogEvents` requests to
-  paginate through events in either forward or backward direction. You can
+  include a `nextForwardToken` and a `nextBackwardToken` in the response
+  body. You can use any of these tokens in subsequent `GetLogEvents` requests
+  to paginate through events in either forward or backward direction. You can
   also limit the number of log events returned in the response by specifying
-  the <code class="code">limit` parameter in the request.
+  the `limit` parameter in the request.
   """
   def get_log_events(client, input, options \\ []) do
     request(client, "GetLogEvents", input, options)
@@ -274,9 +275,8 @@ defmodule AWS.Logs do
   Creates or updates a `Destination`. A destination encapsulates a physical
   resource (such as a Kinesis stream) and allows you to subscribe to a
   real-time stream of log events of a different account, ingested through
-  <code class="code">PutLogEvents` requests. Currently, the only supported
-  physical resource is a Amazon Kinesis stream belonging to the same account
-  as the destination.
+  `PutLogEvents` requests. Currently, the only supported physical resource is
+  a Amazon Kinesis stream belonging to the same account as the destination.
 
   A destination controls what is written to its Amazon Kinesis stream through
   an access policy. By default, PutDestination does not set any access policy
@@ -302,22 +302,32 @@ defmodule AWS.Logs do
   @doc """
   Uploads a batch of log events to the specified log stream.
 
-  Every PutLogEvents request must include the <code
-  class="code">sequenceToken` obtained from the response of the previous
-  request. An upload in a newly created log stream does not require a <code
-  class="code">sequenceToken`.
+  Every PutLogEvents request must include the `sequenceToken` obtained from
+  the response of the previous request. An upload in a newly created log
+  stream does not require a `sequenceToken`. You can also get the
+  `sequenceToken` using `DescribeLogStreams`.
 
-  The batch of events must satisfy the following constraints: <ul> <li>The
-  maximum batch size is 1,048,576 bytes, and this size is calculated as the
-  sum of all event messages in UTF-8, plus 26 bytes for each log event.</li>
-  <li>None of the log events in the batch can be more than 2 hours in the
-  future.</li> <li>None of the log events in the batch can be older than 14
-  days or the retention period of the log group.</li> <li>The log events in
-  the batch must be in chronological ordered by their <code
-  class="code">timestamp`.</li> <li>The maximum number of log events in a
-  batch is 10,000.</li> <li>A batch of log events in a single PutLogEvents
-  request cannot span more than 24 hours. Otherwise, the PutLogEvents
-  operation will fail.</li> </ul>
+  The batch of events must satisfy the following constraints:
+
+  <ul> <li> The maximum batch size is 1,048,576 bytes, and this size is
+  calculated as the sum of all event messages in UTF-8, plus 26 bytes for
+  each log event.
+
+  </li> <li> None of the log events in the batch can be more than 2 hours in
+  the future.
+
+  </li> <li> None of the log events in the batch can be older than 14 days or
+  the retention period of the log group.
+
+  </li> <li> The log events in the batch must be in chronological ordered by
+  their `timestamp`.
+
+  </li> <li> The maximum number of log events in a batch is 10,000.
+
+  </li> <li> A batch of log events in a single PutLogEvents request cannot
+  span more than 24 hours. Otherwise, the PutLogEvents operation will fail.
+
+  </li> </ul>
   """
   def put_log_events(client, input, options \\ []) do
     request(client, "PutLogEvents", input, options)
@@ -326,7 +336,7 @@ defmodule AWS.Logs do
   @doc """
   Creates or updates a metric filter and associates it with the specified log
   group. Metric filters allow you to configure rules to extract metric data
-  from log events ingested through <code class="code">PutLogEvents` requests.
+  from log events ingested through `PutLogEvents` requests.
 
   The maximum number of metric filters that can be associated with a log
   group is 100.
@@ -347,19 +357,24 @@ defmodule AWS.Logs do
   @doc """
   Creates or updates a subscription filter and associates it with the
   specified log group. Subscription filters allow you to subscribe to a
-  real-time stream of log events ingested through <code
-  class="code">PutLogEvents` requests and have them delivered to a specific
-  destination. Currently, the supported destinations are: <ul> <li> An Amazon
-  Kinesis stream belonging to the same account as the subscription filter,
-  for same-account delivery. </li> <li> A logical destination (used via an
-  ARN of `Destination`) belonging to a different account, for cross-account
-  delivery. </li> <li> An Amazon Kinesis Firehose stream belonging to the
-  same account as the subscription filter, for same-account delivery. </li>
-  <li> An AWS Lambda function belonging to the same account as the
-  subscription filter, for same-account delivery. </li> </ul>
+  real-time stream of log events ingested through `PutLogEvents` requests and
+  have them delivered to a specific destination. Currently, the supported
+  destinations are:
 
-  Currently there can only be one subscription filter associated with a log
-  group.
+  <ul> <li> An Amazon Kinesis stream belonging to the same account as the
+  subscription filter, for same-account delivery.
+
+  </li> <li> A logical destination (used via an ARN of `Destination`)
+  belonging to a different account, for cross-account delivery.
+
+  </li> <li> An Amazon Kinesis Firehose stream belonging to the same account
+  as the subscription filter, for same-account delivery.
+
+  </li> <li> An AWS Lambda function belonging to the same account as the
+  subscription filter, for same-account delivery.
+
+  </li> </ul> Currently there can only be one subscription filter associated
+  with a log group.
   """
   def put_subscription_filter(client, input, options \\ []) do
     request(client, "PutSubscriptionFilter", input, options)

@@ -11,9 +11,21 @@ defmodule AWS.DirectoryService do
   """
 
   @doc """
+  If the DNS server for your on-premises domain uses a publicly addressable
+  IP address, you must add a CIDR address block to correctly route traffic to
+  and from your Microsoft AD on Amazon Web Services. *AddIpRoutes* adds this
+  address block. You can also use *AddIpRoutes* to facilitate routing traffic
+  that uses public IP ranges from your Microsoft AD on AWS to a peer VPC.
+  """
+  def add_ip_routes(client, input, options \\ []) do
+    request(client, "AddIpRoutes", input, options)
+  end
+
+  @doc """
   Adds or overwrites one or more tags for the specified Amazon Directory
   Services directory. Each directory can have a maximum of 10 tags. Each tag
-  consists of a key and optional value. Tag keys must be unique per resource.
+  consists of a key and optional value. Tag keys must be unique to each
+  resource.
   """
   def add_tags_to_resource(client, input, options \\ []) do
     request(client, "AddTagsToResource", input, options)
@@ -248,6 +260,13 @@ defmodule AWS.DirectoryService do
   end
 
   @doc """
+  Lists the address blocks that you have added to a directory.
+  """
+  def list_ip_routes(client, input, options \\ []) do
+    request(client, "ListIpRoutes", input, options)
+  end
+
+  @doc """
   Lists all tags on an Amazon Directory Services directory.
   """
   def list_tags_for_resource(client, input, options \\ []) do
@@ -264,6 +283,13 @@ defmodule AWS.DirectoryService do
   """
   def register_event_topic(client, input, options \\ []) do
     request(client, "RegisterEventTopic", input, options)
+  end
+
+  @doc """
+  Removes IP address blocks from a directory.
+  """
+  def remove_ip_routes(client, input, options \\ []) do
+    request(client, "RemoveIpRoutes", input, options)
   end
 
   @doc """

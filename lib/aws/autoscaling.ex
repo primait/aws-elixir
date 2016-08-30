@@ -25,7 +25,17 @@ defmodule AWS.AutoScaling do
 
   <ul> <li> `us-east-1`
 
+  </li> <li> `us-west-1`
+
   </li> <li> `us-west-2`
+
+  </li> <li> `ap-southeast-1`
+
+  </li> <li> `ap-southeast-2`
+
+  </li> <li> `ap-northeast-1`
+
+  </li> <li> `eu-central-1`
 
   </li> <li> `eu-west-1`
 
@@ -77,7 +87,7 @@ defmodule AWS.AutoScaling do
 
   @doc """
   Provides descriptive information for scaling activities with a specified
-  service namespace.
+  service namespace for the previous six weeks.
 
   You can filter the results in a service namespace with the `ResourceId` and
   `ScalableDimension` parameters.

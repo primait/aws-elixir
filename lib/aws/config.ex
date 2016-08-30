@@ -77,6 +77,16 @@ defmodule AWS.Config do
   end
 
   @doc """
+  Deletes the evaluation results for the specified Config rule. You can
+  specify one Config rule per request. After you delete the evaluation
+  results, you can call the `StartConfigRulesEvaluation` API to start
+  evaluating your AWS resources against the rule.
+  """
+  def delete_evaluation_results(client, input, options \\ []) do
+    request(client, "DeleteEvaluationResults", input, options)
+  end
+
+  @doc """
   Schedules delivery of a configuration snapshot to the Amazon S3 bucket in
   the specified delivery channel. After the delivery has started, AWS Config
   sends following notifications using an Amazon SNS topic that you have
@@ -109,11 +119,10 @@ defmodule AWS.Config do
   <li>The rule's AWS Lambda function is failing to send evaluation results to
   AWS Config. Verify that the role that you assigned to your configuration
   recorder includes the `config:PutEvaluations` permission. If the rule is a
-  customer managed rule, verify that the AWS Lambda execution role includes
-  the `config:PutEvaluations` permission.</li> <li>The rule's AWS Lambda
-  function has returned `NOT_APPLICABLE` for all evaluation results. This can
-  occur if the resources were deleted or removed from the rule's scope.</li>
-  </ul>
+  custom rule, verify that the AWS Lambda execution role includes the
+  `config:PutEvaluations` permission.</li> <li>The rule's AWS Lambda function
+  has returned `NOT_APPLICABLE` for all evaluation results. This can occur if
+  the resources were deleted or removed from the rule's scope.</li> </ul>
   """
   def describe_compliance_by_config_rule(client, input, options \\ []) do
     request(client, "DescribeComplianceByConfigRule", input, options)
@@ -138,11 +147,10 @@ defmodule AWS.Config do
   <li>The rule's AWS Lambda function is failing to send evaluation results to
   AWS Config. Verify that the role that you assigned to your configuration
   recorder includes the `config:PutEvaluations` permission. If the rule is a
-  customer managed rule, verify that the AWS Lambda execution role includes
-  the `config:PutEvaluations` permission.</li> <li>The rule's AWS Lambda
-  function has returned `NOT_APPLICABLE` for all evaluation results. This can
-  occur if the resources were deleted or removed from the rule's scope.</li>
-  </ul>
+  custom rule, verify that the AWS Lambda execution role includes the
+  `config:PutEvaluations` permission.</li> <li>The rule's AWS Lambda function
+  has returned `NOT_APPLICABLE` for all evaluation results. This can occur if
+  the resources were deleted or removed from the rule's scope.</li> </ul>
   """
   def describe_compliance_by_resource(client, input, options \\ []) do
     request(client, "DescribeComplianceByResource", input, options)
@@ -301,15 +309,15 @@ defmodule AWS.Config do
   Adds or updates an AWS Config rule for evaluating whether your AWS
   resources comply with your desired configurations.
 
-  You can use this action for customer managed Config rules and AWS managed
-  Config rules. A customer managed Config rule is a custom rule that you
-  develop and maintain. An AWS managed Config rule is a customizable,
-  predefined rule that is provided by AWS Config.
+  You can use this action for custom Config rules and AWS managed Config
+  rules. A custom Config rule is a rule that you develop and maintain. An AWS
+  managed Config rule is a customizable, predefined rule that AWS Config
+  provides.
 
-  If you are adding a new customer managed Config rule, you must first create
-  the AWS Lambda function that the rule invokes to evaluate your resources.
-  When you use the `PutConfigRule` action to add the rule to AWS Config, you
-  must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the
+  If you are adding a new custom Config rule, you must first create the AWS
+  Lambda function that the rule invokes to evaluate your resources. When you
+  use the `PutConfigRule` action to add the rule to AWS Config, you must
+  specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the
   function. Specify the ARN for the `SourceIdentifier` key. This key is part
   of the `Source` object, which is part of the `ConfigRule` object.
 
@@ -388,6 +396,19 @@ defmodule AWS.Config do
   """
   def put_evaluations(client, input, options \\ []) do
     request(client, "PutEvaluations", input, options)
+  end
+
+  @doc """
+  Evaluates your resources against the specified Config rules. You can
+  specify up to 25 Config rules per request.
+
+  An existing `StartConfigRulesEvaluation` call must complete for the rules
+  that you specified before you can call the API again. If you chose to have
+  AWS Config stream to an Amazon SNS topic, you will receive a notification
+  when the evaluation starts.
+  """
+  def start_config_rules_evaluation(client, input, options \\ []) do
+    request(client, "StartConfigRulesEvaluation", input, options)
   end
 
   @doc """

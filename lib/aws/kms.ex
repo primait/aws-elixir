@@ -184,6 +184,24 @@ defmodule AWS.KMS do
   end
 
   @doc """
+  Deletes key material that you previously imported and makes the specified
+  customer master key (CMK) unusable. For more information about importing
+  key material into AWS KMS, see [Importing Key
+  Material](http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)
+  in the *AWS Key Management Service Developer Guide*.
+
+  When the specified CMK is in the `PendingDeletion` state, this operation
+  does not change the CMK's state. Otherwise, it changes the CMK's state to
+  `PendingImport`.
+
+  After you delete key material, you can use `ImportKeyMaterial` to reimport
+  the same key material into the CMK.
+  """
+  def delete_imported_key_material(client, input, options \\ []) do
+    request(client, "DeleteImportedKeyMaterial", input, options)
+  end
+
+  @doc """
   Provides detailed information about the specified customer master key.
   """
   def describe_key(client, input, options \\ []) do
@@ -322,6 +340,59 @@ defmodule AWS.KMS do
   """
   def get_key_rotation_status(client, input, options \\ []) do
     request(client, "GetKeyRotationStatus", input, options)
+  end
+
+  @doc """
+  Returns the items you need in order to import key material into AWS KMS
+  from your existing key management infrastructure. For more information
+  about importing key material into AWS KMS, see [Importing Key
+  Material](http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)
+  in the *AWS Key Management Service Developer Guide*.
+
+  You must specify the key ID of the customer master key (CMK) into which you
+  will import key material. This CMK's `Origin` must be `EXTERNAL`. You must
+  also specify the wrapping algorithm and type of wrapping key (public key)
+  that you will use to encrypt the key material.
+
+  This operation returns a public key and an import token. Use the public key
+  to encrypt the key material. Store the import token to send with a
+  subsequent `ImportKeyMaterial` request. The public key and import token
+  from the same response must be used together. These items are valid for 24
+  hours, after which they cannot be used for a subsequent `ImportKeyMaterial`
+  request. To retrieve new ones, send another `GetParametersForImport`
+  request.
+  """
+  def get_parameters_for_import(client, input, options \\ []) do
+    request(client, "GetParametersForImport", input, options)
+  end
+
+  @doc """
+  Imports key material into an AWS KMS customer master key (CMK) from your
+  existing key management infrastructure. For more information about
+  importing key material into AWS KMS, see [Importing Key
+  Material](http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html)
+  in the *AWS Key Management Service Developer Guide*.
+
+  You must specify the key ID of the CMK to import the key material into.
+  This CMK's `Origin` must be `EXTERNAL`. You must also send an import token
+  and the encrypted key material. Send the import token that you received in
+  the same `GetParametersForImport` response that contained the public key
+  that you used to encrypt the key material. You must also specify whether
+  the key material expires and if so, when. When the key material expires,
+  AWS KMS deletes the key material and the CMK becomes unusable. To use the
+  CMK again, you can reimport the same key material. If you set an expiration
+  date, you can change it only by reimporting the same key material and
+  specifying a new expiration date.
+
+  When this operation is successful, the specified CMK's key state changes to
+  `Enabled`, and you can use the CMK.
+
+  After you successfully import key material into a CMK, you can reimport the
+  same key material into that CMK, but you cannot import different key
+  material.
+  """
+  def import_key_material(client, input, options \\ []) do
+    request(client, "ImportKeyMaterial", input, options)
   end
 
   @doc """

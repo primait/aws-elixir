@@ -8,7 +8,10 @@ defmodule AWS.Cognito.IdentityProvider do
   identity and access policies.
 
   This API reference provides information about user pools in Amazon Cognito
-  Identity, which is a new capability that is available as a beta.
+  Identity.
+
+  For more information, see [Amazon
+  Cognito](https://aws.amazon.com/cognito/).
   """
 
   @doc """
@@ -56,11 +59,39 @@ defmodule AWS.Cognito.IdentityProvider do
   end
 
   @doc """
+  Forgets the device, as an administrator.
+  """
+  def admin_forget_device(client, input, options \\ []) do
+    request(client, "AdminForgetDevice", input, options)
+  end
+
+  @doc """
+  Gets the device, as an administrator.
+  """
+  def admin_get_device(client, input, options \\ []) do
+    request(client, "AdminGetDevice", input, options)
+  end
+
+  @doc """
   Gets the specified user by user name in a user pool as an administrator.
   Works on any user.
   """
   def admin_get_user(client, input, options \\ []) do
     request(client, "AdminGetUser", input, options)
+  end
+
+  @doc """
+  Initiates the authentication flow, as an administrator.
+  """
+  def admin_initiate_auth(client, input, options \\ []) do
+    request(client, "AdminInitiateAuth", input, options)
+  end
+
+  @doc """
+  Lists devices, as an administrator.
+  """
+  def admin_list_devices(client, input, options \\ []) do
+    request(client, "AdminListDevices", input, options)
   end
 
   @doc """
@@ -72,10 +103,24 @@ defmodule AWS.Cognito.IdentityProvider do
   end
 
   @doc """
+  Responds to an authentication challenge, as an administrator.
+  """
+  def admin_respond_to_auth_challenge(client, input, options \\ []) do
+    request(client, "AdminRespondToAuthChallenge", input, options)
+  end
+
+  @doc """
   Sets all the user settings for a specified user name. Works on any user.
   """
   def admin_set_user_settings(client, input, options \\ []) do
     request(client, "AdminSetUserSettings", input, options)
+  end
+
+  @doc """
+  Updates the device status as an administrator.
+  """
+  def admin_update_device_status(client, input, options \\ []) do
+    request(client, "AdminUpdateDeviceStatus", input, options)
   end
 
   @doc """
@@ -87,10 +132,25 @@ defmodule AWS.Cognito.IdentityProvider do
   end
 
   @doc """
+  Signs out users from all devices, as an administrator.
+  """
+  def admin_user_global_sign_out(client, input, options \\ []) do
+    request(client, "AdminUserGlobalSignOut", input, options)
+  end
+
+  @doc """
   Changes the password for a specified user in a user pool.
   """
   def change_password(client, input, options \\ []) do
     request(client, "ChangePassword", input, options)
+  end
+
+  @doc """
+  Confirms tracking of the device. This API call is the call that beings
+  device tracking.
+  """
+  def confirm_device(client, input, options \\ []) do
+    request(client, "ConfirmDevice", input, options)
   end
 
   @doc """
@@ -169,10 +229,24 @@ defmodule AWS.Cognito.IdentityProvider do
   end
 
   @doc """
+  Forgets the specified device.
+  """
+  def forget_device(client, input, options \\ []) do
+    request(client, "ForgetDevice", input, options)
+  end
+
+  @doc """
   Retrieves the password for the specified client ID or username.
   """
   def forgot_password(client, input, options \\ []) do
     request(client, "ForgotPassword", input, options)
+  end
+
+  @doc """
+  Gets the device.
+  """
+  def get_device(client, input, options \\ []) do
+    request(client, "GetDevice", input, options)
   end
 
   @doc """
@@ -187,6 +261,27 @@ defmodule AWS.Cognito.IdentityProvider do
   """
   def get_user_attribute_verification_code(client, input, options \\ []) do
     request(client, "GetUserAttributeVerificationCode", input, options)
+  end
+
+  @doc """
+  Signs out users from all devices.
+  """
+  def global_sign_out(client, input, options \\ []) do
+    request(client, "GlobalSignOut", input, options)
+  end
+
+  @doc """
+  Initiates the authentication flow.
+  """
+  def initiate_auth(client, input, options \\ []) do
+    request(client, "InitiateAuth", input, options)
+  end
+
+  @doc """
+  Lists the devices.
+  """
+  def list_devices(client, input, options \\ []) do
+    request(client, "ListDevices", input, options)
   end
 
   @doc """
@@ -219,6 +314,13 @@ defmodule AWS.Cognito.IdentityProvider do
   end
 
   @doc """
+  Responds to the authentication challenge.
+  """
+  def respond_to_auth_challenge(client, input, options \\ []) do
+    request(client, "RespondToAuthChallenge", input, options)
+  end
+
+  @doc """
   Sets the user settings like multi-factor authentication (MFA). If MFA is to
   be removed for a particular attribute pass the attribute with code delivery
   as null. If null list is passed, all MFA options are removed.
@@ -233,6 +335,13 @@ defmodule AWS.Cognito.IdentityProvider do
   """
   def sign_up(client, input, options \\ []) do
     request(client, "SignUp", input, options)
+  end
+
+  @doc """
+  Updates the device status.
+  """
+  def update_device_status(client, input, options \\ []) do
+    request(client, "UpdateDeviceStatus", input, options)
   end
 
   @doc """

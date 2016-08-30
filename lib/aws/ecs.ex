@@ -37,6 +37,9 @@ defmodule AWS.ECS do
   In addition to maintaining the desired count of tasks in your service, you
   can optionally run your service behind a load balancer. The load balancer
   distributes traffic across the tasks that are associated with the service.
+  For more information, see [Service Load
+  Balancing](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html)
+  in the *Amazon EC2 Container Service Developer Guide*.
 
   You can optionally specify a deployment configuration for your service.
   During a deployment (which is triggered by changing the task definition of
@@ -292,13 +295,19 @@ defmodule AWS.ECS do
   Definitions](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html)
   in the *Amazon EC2 Container Service Developer Guide*.
 
-  You may also specify an IAM role for your task with the `taskRoleArn`
-  parameter. When you specify an IAM role for a task, its containers can then
-  use the latest versions of the AWS CLI or SDKs to make API requests to the
-  AWS services that are specified in the IAM policy associated with the role.
-  For more information, see [IAM Roles for
+  You can specify an IAM role for your task with the `taskRoleArn` parameter.
+  When you specify an IAM role for a task, its containers can then use the
+  latest versions of the AWS CLI or SDKs to make API requests to the AWS
+  services that are specified in the IAM policy associated with the role. For
+  more information, see [IAM Roles for
   Tasks](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
   in the *Amazon EC2 Container Service Developer Guide*.
+
+  You can specify a Docker networking mode for the containers in your task
+  definition with the `networkMode` parameter. The available network modes
+  correspond to those described in [Network
+  settings](https://docs.docker.com/engine/reference/run/#/network-settings)
+  in the Docker run reference.
   """
   def register_task_definition(client, input, options \\ []) do
     request(client, "RegisterTaskDefinition", input, options)
